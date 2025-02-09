@@ -1,0 +1,10 @@
+{
+  "/coc-api": {
+    "target": "https://api.clashofclans.com/v1/",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/coc-api": ""
+    }
+  }
+}

@@ -1,0 +1,56 @@
+<main class="table">
+  <section class="table__header">
+    <h1>Lista de miembros del clan</h1>
+  </section>
+  <section class="table__body">
+    <table>
+      <thead>
+      <tr>
+        <th >Ranking <mat-icon svgIcon="filter" (click)="orderMembersByRank()"></mat-icon></th>
+        <th >Miembro <mat-icon svgIcon="filter" (click)="orderMembersByName()"></mat-icon></th>
+        <th >Rol <mat-icon svgIcon="filter" (click)="orderMembersByRole()"></mat-icon></th>
+        <th >Trofeos <mat-icon svgIcon="filter" (click)="orderMembersByTrophies()"></mat-icon></th>
+        <th >Donaciones <mat-icon svgIcon="filter" (click)="orderMembersByDonations()"></mat-icon></th>
+        <th >Donaciones recibidas <mat-icon svgIcon="filter" (click)="orderMembersByRecivedDonations()"></mat-icon></th>
+      </tr>
+      </thead>
+      <tbody>
+        @for (member of clanMembers(); track member.tag) {
+          <tr>
+            <td>
+              @let memberPosition = member.clanRank - member.previousClanRank;
+              @if(memberPosition>0){
+                <span style="color:#E74C3C;margin-right: 5px">{{memberPosition}}</span>
+                <mat-icon svgIcon="red-arrow"></mat-icon>
+              } @else if (memberPosition<0){
+                <span style="color:#A5EB78;margin-right: 5px">{{member.previousClanRank - member.clanRank}}</span>
+                <mat-icon svgIcon="green-arrow"></mat-icon>
+              }@else{
+                <span style="margin-right: 15px"></span>
+                <mat-icon svgIcon="equal"></mat-icon>
+              }
+              {{member.clanRank}}
+            </td>
+            <td>
+              {{ member.name }}
+            </td>
+            <td>
+              {{ member.role }}
+            </td>
+            <td>
+              {{ member.trophies }}
+            </td>
+            <td>
+              {{ member.donations }}
+            </td>
+            <td>
+              {{ member.donationsReceived }}
+            </td>
+          </tr>
+        } @empty {
+          <tr><td>There are no items.</td></tr>
+        }
+      </tbody>
+    </table>
+  </section>
+</main>

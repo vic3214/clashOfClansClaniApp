@@ -1,0 +1,35 @@
+<mat-toolbar style="width: 100%">
+  <img
+    ngSrc="https://api-assets.clashofclans.com/badges/70/DMzacVFy4k1h3McrvF7Yf8xbQJaEpWBbvf0Ee8Tia4c.png"
+    width="50"
+    height="50"
+    alt="Descripción de la imagen"
+    priority
+  />
+  <h2 style="margin-right: 20px; margin-left: 10px">EL CLANI</h2>
+  <div class="spacer">
+    <button
+      mat-button
+      style="margin-right: 20px"
+      aria-label="Members button"
+      [routerLink]="['/miembros']"
+      routerLinkActive="router-link-active"
+    >
+      <mat-icon svgIcon="members"></mat-icon>
+      Miembros
+    </button>
+    <button
+      mat-button
+      style="margin-right: 20px"
+      aria-label="Ligas buton"
+      [routerLink]="['/ligas']"
+    >
+      <mat-icon svgIcon="league"></mat-icon>
+      Ligas
+    </button>
+    <button mat-button aria-label="Guerras button" [routerLink]="['/guerras']">
+      <mat-icon svgIcon="sword"></mat-icon>
+      Guerras
+    </button>
+  </div>
+</mat-toolbar>
