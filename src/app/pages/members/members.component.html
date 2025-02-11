@@ -16,7 +16,7 @@
       </thead>
       <tbody>
         @for (member of clanMembers(); track member.tag) {
-          <tr>
+          <tr (click)="goToMemberDetail(member.tag)">
             <td>
               @let memberPosition = member.clanRank - member.previousClanRank;
               @if(memberPosition>0){

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { MembersComponent } from './pages/members/members.component';
 import { WarLeaguesComponent } from './pages/war-leagues/war-leagues.component';
 import { WarsComponent } from './pages/wars/wars.component';
+import {PlayerComponent} from '@app/pages/player/player.component';
 
 export const routes: Routes = [
   {
@@ -15,5 +16,9 @@ export const routes: Routes = [
   {
     path: 'guerras',
     component: WarsComponent,
+  },
+  {
+    path: 'player/:tag',
+    component: PlayerComponent,
   },
 ];

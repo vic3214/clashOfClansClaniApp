@@ -17,43 +17,15 @@ const roleMapping: { [key in Role]: RoleTranslation } = {
 
 export const MemberAdapter = (membersResponse: MemberListResponseModel): MemberListModel => {
 
-  const adaptMember = (item: Item & { role: Role }): Member => {  // Tipado correcto
+  const adaptMember = (item: Item & { role: Role }): Member => {
     return {
-      tag: item.tag,
-      name: item.name,
-      townHallLevel: item.townHallLevel,
-      expLevel: item.expLevel,
-      league: {
-        id: item.league.id,
-        name: item.league.name,
-        iconUrls: {
-          small: item.league.iconUrls.small,
-          tiny: item.league.iconUrls.tiny,
-          medium: item.league.iconUrls.medium,
-        },
-      },
-      trophies: item.trophies,
-      builderBaseTrophies: item.builderBaseTrophies,
-      clanRank: item.clanRank,
-      previousClanRank: item.previousClanRank,
-      donations: item.donations,
-      donationsReceived: item.donationsReceived,
-      role: roleMapping[item.role] || item.role as unknown as RoleTranslation, // Mapeo del rol
-      playerHouse: item.playerHouse ? {
-        elements: item.playerHouse.elements.map(element => ({
-          type: element.type,
-          id: element.id,
-        })),
-      } : undefined,
-      builderBaseLeague: {
-        id: item.builderBaseLeague.id,
-        name: item.builderBaseLeague.name,
-      },
+      ...item,
+      role: roleMapping[item.role] || item.role as unknown as RoleTranslation,
     };
   };
 
   return {
-    items: (membersResponse.items as (Item & { role: Role })[]).map(adaptMember), // Tipado del array
+    items: (membersResponse.items as (Item & { role: Role })[]).map(adaptMember),
     paging: membersResponse.paging,
   };
 };

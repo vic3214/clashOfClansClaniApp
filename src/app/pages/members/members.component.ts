@@ -10,6 +10,7 @@ import { DomSanitizer} from '@angular/platform-browser';
 import { MembersService } from '@app/services/members/members.service';
 import {Item} from '@app/core/models/base-models/member-list-base.model';
 import {Member} from '@app/core/models/member-list.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-members',
@@ -22,6 +23,7 @@ export class MembersComponent implements OnInit {
   private membersService = inject(MembersService);
   private matIconRegistry = inject(MatIconRegistry);
   private domSanitizer = inject(DomSanitizer);
+  private router = inject(Router);
 
   protected clanMembers: WritableSignal<Member[]> = signal([]);
   private orderStates = {
@@ -56,6 +58,10 @@ export class MembersComponent implements OnInit {
     this.membersService.getAllClanMembers().subscribe((members) => {
       this.clanMembers.set(members.items);
     });
+  }
+
+  goToMemberDetail(memberTag:string){
+    this.router.navigate(['/player',memberTag]);
   }
 
   orderMembersByRank() {
