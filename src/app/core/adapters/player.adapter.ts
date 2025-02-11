@@ -11,9 +11,15 @@ const roleMapping: { [key in Role]: RoleTranslation } = {
   [Role.Member]: RoleTranslation.Member,
 };
 
-export const PlayerAdapter=(player: PlayerBaseModel): PlayerResponseModel=> {
+const warPreferenceMapping ={
+  'in': 'Dentro',
+  'out': 'Fuera'
+}
+
+export const PlayerAdapter = (player: PlayerBaseModel): PlayerResponseModel => {
   return {
     ...player,
-    role: roleMapping[player.role as Role] || RoleTranslation.Member, // Traduce el rol usando el mapping
+    warPreference: warPreferenceMapping[player.warPreference as keyof typeof warPreferenceMapping] ?? player.warPreference,
+    role: roleMapping[player.role as Role] ?? RoleTranslation.Member,
   };
-}
+};
