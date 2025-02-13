@@ -54,6 +54,12 @@
   font-weight: 500;
 }
 
+.role {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
 .content {
   flex: 1; /* Ocupar el espacio restante */
   overflow-y: auto; /* Permitir scroll si el contenido es mayor */

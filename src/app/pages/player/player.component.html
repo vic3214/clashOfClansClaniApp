@@ -3,8 +3,9 @@
   <div class="header">
     <div class="header-content">
       <div class="header-left">  <img [src]="player()?.league?.iconUrls?.medium || 'assets/unranked.webp'" alt="League Icon"></div>
-      <div class="header-right"> <div class="name">{{ player()?.name }}</div>
+      <div class="header-right"> <div class="name">{{ player()?.name }} </div>
         <div class="tag">{{ player()?.tag }}</div>
+        <div class="role">{{ player()?.role }}</div>
         <div class="level">Nivel {{ player()?.expLevel }}</div>
       </div>
     </div>
@@ -53,10 +54,6 @@
       <div class="stat-item">
         <div class="stat-label">Mayores Trofeos Base del Constructor</div>
         <div class="stat-value">{{ player()?.bestBuilderBaseTrophies }}</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-label">Rol</div>
-        <div class="stat-value">{{ player()?.role }}</div>
       </div>
       <div class="stat-item">
         <div class="stat-label">Preferencia de Guerra</div>

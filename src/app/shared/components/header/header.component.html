@@ -3,7 +3,7 @@
     ngSrc="https://api-assets.clashofclans.com/badges/70/DMzacVFy4k1h3McrvF7Yf8xbQJaEpWBbvf0Ee8Tia4c.png"
     width="50"
     height="50"
-    alt="Descripción de la imagen"
+    alt="Clani"
     priority
   />
   <h2 style="margin-right: 20px; margin-left: 10px">EL CLANI</h2>
@@ -27,9 +27,21 @@
       <mat-icon svgIcon="league"></mat-icon>
       Ligas
     </button>
-    <button mat-button aria-label="Guerras button" [routerLink]="['/guerras']">
+    <button mat-button aria-label="Guerras button" [routerLink]="['/guerras']" style="margin-right: 20px">
       <mat-icon svgIcon="sword"></mat-icon>
       Guerras
+    </button>
+
+    <button mat-button aria-label="Guerras button" [routerLink]="['/capital']">
+      <img
+        ngSrc="assets/coin.webp"
+        width="20"
+        height="20"
+        alt="Capital"
+        priority
+        class="capital"
+      />
+      Capital
     </button>
   </div>
 </mat-toolbar>

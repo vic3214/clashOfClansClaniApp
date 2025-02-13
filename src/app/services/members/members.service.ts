@@ -19,7 +19,7 @@ export class MembersService {
   });
 
   getAllClanMembers() {
-    const url = '/coc-api/clans/' + this.clanTag + '/members';
+    const url = '/coc-api/clans/' + encodeURIComponent(this.clanTag) + '/members';
 
     return this.http.get<MemberListResponseModel>(url, { headers: this.header }).pipe(
       map((membersListResponse: MemberListResponseModel) => MemberAdapter(membersListResponse))

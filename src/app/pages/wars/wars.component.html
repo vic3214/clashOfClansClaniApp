@@ -1,1 +1,166 @@
-<p>wars works!</p>
+
+@if(actualWar()){
+  <div class="profile-container">
+    <div class="header">
+      <div class="header-content">
+        <div class="clan-header-container">
+          <img [src]="actualWar()?.clan?.badgeUrls?.medium" alt="Clan Badge">
+          <div class="clan-name">{{actualWar()?.clan?.name}}</div>
+        </div>
+        <div class="vs">VS</div>
+        <div class="clan-header-container">
+          <img [src]="actualWar()?.opponent?.badgeUrls?.medium" alt="Opponent Badge">
+          <div class="clan-name">{{actualWar()?.opponent?.name}}</div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="war-info">
+      <div class="info-item">
+        <span>Inicio de preparación:</span>
+        <span>{{ actualWar()?.preparationStartTime | date:'medium' }}</span>
+      </div>
+      <div class="info-item">
+        <span>Inicio de guerra:</span>
+        <span>{{ actualWar()?.startTime | date:'medium' }}</span>
+      </div>
+      <div class="info-item">
+        <span>Fin de guerra:</span>
+        <span>{{ actualWar()?.endTime | date:'medium' }}</span>
+      </div>
+    </div>
+
+    <div class="clan-details" style="display: flex; gap: 20px;">
+      <div class="clan-container" style="flex: 1;">
+        <h3>{{ actualWar()?.clan?.name }}</h3>
+        <div class="info-item">Ataques: {{ actualWar()?.clan?.attacks }}</div>
+        <div class="info-item">Estrellas: {{ actualWar()?.clan?.stars }}</div>
+        <div class="info-item">Destrucción: {{ actualWar()?.clan?.destructionPercentage }}%</div>
+        <div class="members">
+          <h4>Miembros</h4>
+          @for(member of sortedClanMembers;track member){
+            <div class="member-item">
+              <span>{{ member?.mapPosition }}. {{ member?.name }} (TH{{ member?.townhallLevel }}) </span>
+              @if(member?.attacks && member?.attacks!.length > 0){
+                <h5>Ataques:</h5>
+                @if(member!.attacks!.length>0){
+                  <span class="star-container">Contra: {{ getClanMemberName(actualWar()?.opponent,member?.attacks?.[0]?.defenderTag) }} -
+                    @for (i of [0, 1, 2]; track i) {
+                      @if (i < (member?.attacks?.[0]?.stars ?? 0)) {
+                        <mat-icon svgIcon="star" class="star"></mat-icon>
+                      } @else {
+                        <mat-icon svgIcon="empty-star" class="star"></mat-icon>
+                      }
+                    }
+                    ({{ member!.attacks?.[0]!.destructionPercentage }}%)</span>
+                }@else{
+                  <span style="height:28px">1. No realizado</span>
+                }
+
+                @if(member!.attacks!.length>1){
+                  <span class="star-container">Contra: {{ getClanMemberName(actualWar()?.opponent,member?.attacks?.[1]?.defenderTag) }} -
+                    @for (i of [0, 1, 2]; track i) {
+                      @if (i < (member?.attacks?.[1]?.stars ?? 0)) {
+                        <mat-icon svgIcon="star" class="star"></mat-icon>
+                      } @else {
+                        <mat-icon svgIcon="empty-star" class="star"></mat-icon>
+                      }
+                    }
+                    ({{ member?.attacks?.[1]?.destructionPercentage }}%)</span>
+                }@else{
+                  <span style="height:28px">2. No realizado</span>
+                }
+
+
+              } @else {
+                <h5>Ataques:</h5>
+                <span style="height:28px">1. No realizado</span>
+                <span style="height:28px">2. No realizado</span>
+              }
+              @if(member!.opponentAttacks > 0){
+                <h5>Mejor ataque enemigo:</h5>
+                @if(member?.bestOpponentAttack){
+                  <span class="star-container">{{ getClanMemberName(actualWar()?.opponent,member?.bestOpponentAttack?.attackerTag) }} -
+                    @for (i of [0, 1, 2]; track i) {
+                      @if (i < (member?.bestOpponentAttack?.stars ?? 0)) {
+                        <mat-icon svgIcon="star" class="star"></mat-icon>
+                      } @else {
+                        <mat-icon svgIcon="empty-star" class="star"></mat-icon>
+                      }
+                    }
+                    ({{ member?.bestOpponentAttack?.destructionPercentage }}%)</span>
+                }
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="clan-container" style="flex: 1;">
+        <h3>{{ actualWar()?.opponent?.name }}</h3>
+        <div class="info-item">Ataques: {{ actualWar()?.opponent?.attacks }}</div>
+        <div class="info-item">Estrellas: {{ actualWar()?.opponent?.stars }}</div>
+        <div class="info-item">Destrucción: {{ actualWar()?.opponent?.destructionPercentage }}%</div>
+        <div class="members">
+          <h4>Miembros</h4>
+          @for(member of sortedOpponentMembers;track member){
+            <div class="member-item">
+              <span>{{ member?.mapPosition }}. {{ member?.name }} (TH{{ member?.townhallLevel }}) </span>
+              @if(member?.attacks && member?.attacks!.length > 0){
+                <h5>Ataques:</h5>
+                @if(member!.attacks!.length>0){
+                  <span class="star-container">Contra: {{ getClanMemberName(actualWar()?.clan,member?.attacks?.[0]?.defenderTag) }} -
+                    @for (i of [0, 1, 2]; track i) {
+                      @if (i < (member?.attacks?.[0]?.stars ?? 0)) {
+                        <mat-icon svgIcon="star" class="star"></mat-icon>
+                      } @else {
+                        <mat-icon svgIcon="empty-star" class="star"></mat-icon>
+                      }
+                    }
+                    ({{ member!.attacks?.[0]!.destructionPercentage }}%)</span>
+                }@else{
+                  <span style="height:28px">1. No realizado</span>
+                }
+
+                @if(member!.attacks!.length>1){
+                  <span class="star-container">Contra: {{ getClanMemberName(actualWar()?.clan,member?.attacks?.[1]?.defenderTag) }} -
+                    @for (i of [0, 1, 2]; track i) {
+                    @if (i < (member?.attacks?.[1]?.stars ?? 0)) {
+                      <mat-icon svgIcon="star" class="star"></mat-icon>
+                    } @else {
+                      <mat-icon svgIcon="empty-star" class="star"></mat-icon>
+                    }
+                  } ({{ member?.attacks?.[1]?.destructionPercentage }}%)</span>
+                }@else{
+                  <span style="height:28px">2. No realizado</span>
+                }
+              } @else {
+                <h5>Ataques:</h5>
+                <span style="height:28px">1. No realizado</span>
+                <span style="height:28px">2. No realizado</span>
+              }
+              @if(member!.opponentAttacks > 0){
+                <h5>Mejor ataque enemigo:</h5>
+                @if(member?.bestOpponentAttack){
+                  <span class="star-container">{{ getClanMemberName(actualWar()?.clan, member?.bestOpponentAttack?.attackerTag) }} -
+                    @for (i of [0, 1, 2]; track i) {
+                      @if (i < (member?.bestOpponentAttack?.stars ?? 0)) {
+                        <mat-icon svgIcon="star" class="star"></mat-icon>
+                      } @else {
+                        <mat-icon svgIcon="empty-star" class="star"></mat-icon>
+                      }
+                    }
+                    ({{ member?.bestOpponentAttack?.destructionPercentage }}%)</span>
+                }
+              }
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+  </div>
+}@else{
+  <app-loader></app-loader>
+}

@@ -1,5 +1,5 @@
 main.table{
-  width: 82vw;
+  width: 95vw;
   height: 80vh;
   background-color: #fff5;
 
@@ -77,4 +77,10 @@ thead th{
 
 tbody tr:nth-child(even){
   background-color: #F3F5F5;
+}
+
+@media(max-width: 900px){
+  main.table{
+    width: 93vw;
+  }
 }

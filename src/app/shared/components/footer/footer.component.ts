@@ -8,5 +8,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FooterComponent {
+  anio: number = new Date().getFullYear();
+  nombreSitio: string = 'El Clani';
 
 }
