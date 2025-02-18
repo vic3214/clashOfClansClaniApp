@@ -157,6 +157,52 @@ i.fas.fa-star {
   top: 6px;
 }
 
+
+.war-result-container {
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  margin: 20px auto; /* Margen superior e inferior y centrado horizontal */
+  /* Opcional: Ancho máximo para evitar que se extienda demasiado */
+  max-width: 400px;
+}
+
+.war-result {
+  text-align: center;
+  padding: 15px 25px; /* Ajusta el padding según tus preferencias */
+  border-radius: 10px; /* Bordes redondeados */
+  font-weight: bold;
+  font-size: 2rem; /* Tamaño de fuente */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+  width: 80vw;
+  color: #fff;
+  background: #1e1e2f;
+}
+
+.war-result:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada al pasar el mouse */
+}
+
+.victory {
+  color: #4CAF50; /* Verde para la victoria */
+}
+
+.defeat {
+  color: #F44336; /* Rojo para la derrota */
+}
+
+.draw {
+  color: #FFC107; /* Amarillo para el empate */
+}
+
+/* Estilos para pantallas más pequeñas (opcional) */
+@media (max-width: 768px) {
+  .war-result {
+    font-size: 1rem; /* Tamaño de fuente más pequeño */
+    padding: 10px 20px; /* Padding más pequeño */
+  }
+}
+
 @media (max-width: 900px) {
   .war-info{
     flex-direction: column;

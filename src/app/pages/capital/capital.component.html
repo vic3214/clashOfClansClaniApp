@@ -1,1 +1,60 @@
-<p>capital works!</p>
+@if (capitalHistory()) {
+
+<div class="capital-container">
+
+  @if (latestRaidSeason()) {
+    <div class="latest-raid-season">
+      <h2>Última Temporada de Asalto</h2>
+      <div class="info-grid">
+        <p><span>Inicio:</span> {{ latestRaidSeason()?.startTime |  date:"d MMMM yyyy hh:mm":'':'es-ES' }}</p>
+        <p><span>Fin:</span> {{ latestRaidSeason()?.endTime |  date:"d MMMM yyyy hh:mm":'':'es-ES' }}</p>
+        <p><span>Botín Total:</span> {{ latestRaidSeason()?.capitalTotalLoot  | number:'1.0-0'}}</p>
+        <p><span>Asaltos Completados:</span> {{ latestRaidSeason()?.raidsCompleted }}</p>
+        <p><span>Ataques Totales:</span> {{ latestRaidSeason()?.totalAttacks }}</p>
+        <p><span>Distritos Destruidos:</span> {{ latestRaidSeason()?.enemyDistrictsDestroyed }}</p>
+        <p><span>Eficiencia de Ataque:</span> {{ calculateAttackEfficiency(latestRaidSeason()!) | number:'1.1-1' }}%</p>
+        <p><span>Recompensa Ofensiva:</span> {{ latestRaidSeason()?.offensiveReward }}</p>
+        <p><span>Recompensa Defensiva:</span> {{ latestRaidSeason()?.defensiveReward }}</p>
+      </div>
+    </div>
+  }
+
+
+
+  @if (capitalHistory() && capitalHistory()?.items!.length > 0) {
+    <div class="raid-history">
+      <h2>Historial de Temporadas de Asalto</h2>
+
+      @if (capitalHistory() && capitalHistory()?.items!.length > 1) {
+        @for (raidSeason of capitalHistory()?.items; track raidSeason; let i = $index) {
+          @if (i > 0) {
+            <div class="raid-season-card">
+              <h3>Temporada {{ capitalHistory()!.items.length - i }}</h3>
+              <div class="info-grid">
+                <p><span>Inicio:</span> {{ raidSeason.startTime |  date:"d MMMM yyyy hh:mm":'es' }}</p>
+                <p><span>Fin:</span> {{ raidSeason.endTime |  date:"d MMMM yyyy hh:mm":'es' }}</p>
+                <p><span>Botín Total:</span> {{ raidSeason.capitalTotalLoot | number:'1.0-0' }}</p>
+                <p><span>Asaltos Completados:</span> {{ raidSeason.raidsCompleted }}</p>
+                <p><span>Ataques Totales:</span> {{ raidSeason.totalAttacks }}</p>
+                <p><span>Distritos Destruidos:</span> {{ raidSeason.enemyDistrictsDestroyed }}</p>
+                <p><span>Eficiencia de Ataque:</span> {{ calculateAttackEfficiency(raidSeason) | number:'1.1-1' }}%</p>
+                <p><span>Recompensa Ofensiva:</span> {{ raidSeason.offensiveReward }}</p>
+                <p><span>Recompensa Defensiva:</span> {{ raidSeason.defensiveReward }}</p>
+              </div>
+            </div>
+          }
+        }
+      }
+    </div>
+  }
+
+  @if (capitalHistory() && capitalHistory()?.items?.length === 0) {
+    <div class="no-data-message">
+      <p>No hay datos disponibles para mostrar.</p>
+    </div>
+  }
+
+</div>
+}@else{
+  <app-loader/>
+}
